@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { darkColor, lightColor } from "../../styled";
+import { mainColor } from "../../styled";
 
 const box = (width: number, height: number) => css`
   width: ${width}px;
   height: ${height}px;
   display: flex;
-  background-color: ${darkColor};
 `;
 const item = (clicked: number, index: number) => {
   return css`
@@ -14,16 +13,20 @@ const item = (clicked: number, index: number) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: ${clicked === index ? `4px solid ${lightColor}` : null};
+    margin: 0;
+    border: none;
+    border-top: ${clicked === index ? `2px solid ${mainColor}` : null};
+    background-color: ${clicked === index ? "#f4f4f4" : "#e0e0e0"};
     span {
-      margin-bottom: ${clicked === index ? "-4px" : "0"};
-      opacity: ${clicked === index ? "1" : "0.5"};
+      margin-top: ${clicked === index ? "-2px" : "0"};
+      font-weight: ${clicked === index ? "800" : "400"};
+      color: ${clicked === index ? "black" : "#525253"};
     }
     :hover {
-      border-bottom: 4px solid ${lightColor};
+      background-color: #d1d1d1;
       span {
-        margin-bottom: -4px;
-        opacity: 1;
+        /* margin-top: -4px;
+        opacity: 1; */
       }
     }
   `;
@@ -35,27 +38,58 @@ const text = css`
 `;
 
 type TabsProps = {
-  tabs: string[];
   width: number;
   height: number;
   clicked: number;
   handleClick: (index: number) => void;
+  children: JSX.Element;
 };
 
-const TabsDemo = ({ tabs, width, height, clicked, handleClick }: TabsProps) => {
+const TabsDemo = ({
+  width,
+  height,
+  clicked,
+  handleClick,
+  children,
+}: // content,
+TabsProps) => {
+  const TabList = children?.props.children[0].props.children;
+  const TabsDescription = children?.props.children[1].props.children;
+
   return (
-    <div css={box(width, height)}>
-      {tabs.map((tab, index) => (
-        <div
-          key={tab}
-          css={item(clicked, index)}
-          onClick={() => handleClick(index)}
-        >
-          <span css={text}>{tab}</span>
-        </div>
-      ))}
+    <div>
+      <div css={box(width, height)}>
+        {TabList &&
+          TabList.map((tab: any, index: number) => (
+            <button
+              key={tab}
+              css={item(clicked, index)}
+              onClick={() => handleClick(index)}
+            >
+              <span css={text}>{tab.props.children}</span>
+            </button>
+          ))}
+      </div>
+      <div>{TabsDescription && TabsDescription[clicked]?.props.children}</div>
     </div>
   );
 };
 
 export default TabsDemo;
+
+type TabsChildProps = {
+  children: JSX.Element;
+};
+
+export const TabList = ({ children }: TabsChildProps) => {
+  return <div>{children}</div>;
+};
+export const Tab = ({ children }: TabsChildProps) => {
+  return <div>{children}</div>;
+};
+export const TabsDescriptions = ({ children }: TabsChildProps) => {
+  return <div>{children}</div>;
+};
+export const TabsDescription = ({ children }: TabsChildProps) => {
+  return <div>{children}</div>;
+};
