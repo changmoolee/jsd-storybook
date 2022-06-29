@@ -28,8 +28,8 @@ export const description = css`
 
 export const lightColor = "#51d3ff";
 
-export const mainColor = "#50C1E9";
+export const mainColor = "#0e62fe";
 
 export const darkColor = "#327e9b";
 
-export const subColor = "#5BE7C4";
+export const subColor = "#393939";
