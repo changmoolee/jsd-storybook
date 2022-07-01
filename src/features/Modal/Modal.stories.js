@@ -5,11 +5,43 @@ import ModalDemo from "./ModalDemo";
 export default {
   title: "Feature/Modal",
   component: ModalDemo,
-  argTypes: {},
+  argTypes: {
+    open: {
+      title: "open",
+      defaultValue: true,
+    },
+    firstbuttonDisabled: {
+      title: "firstbuttonDisabled",
+      type: { name: "boolean", required: false },
+      defaultValue: false,
+    },
+    firstButtonText: {
+      title: "firstButtonText",
+      defaultValue: "Confirm",
+    },
+    firstButtonOnClick: {
+      title: "firstButtonOnClick",
+      description:
+        "You can handle the function props when clicking first button.",
+    },
+    secondarybuttonDisabled: {
+      title: "secondarybuttonDisabled",
+      type: { name: "boolean", required: false },
+      defaultValue: false,
+    },
+    secondaryButtonText: {
+      title: "secondaryButton",
+      defaultValue: "Cancel",
+    },
+    secondaryButtonOnClick: {
+      title: "secondaryButtonOnClick",
+      description:
+        "You can handle the function props when clicking secondary button.",
+    },
+  },
   parameters: {
     componentSubtitle: "Modal",
   },
-  // argTypes: { open: true },
 };
 
 const Template = (args) => {
@@ -20,6 +52,7 @@ const Template = (args) => {
   };
 
   const stateArgs = {
+    open,
     closeModal,
   };
   return <ModalDemo {...stateArgs} {...args} />;
@@ -28,10 +61,8 @@ const Template = (args) => {
 export const Primary = Template.bind({});
 
 Primary.args = {
-  width: 400,
-  height: 300,
-  title: "Modal title is here.",
+  width: 500,
+  title: "Modal title is here",
   description:
     "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosamfacere vitae quis aperiam laudantium, nisi sequi a quaerat veniamvoluptatibus, dolorum ipsam commodi. Unde impedit dolorem reiciendisducimus inventore facilis.",
-  open: true,
 };

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const dim = css`
   position: fixed;
@@ -12,64 +12,141 @@ const dim = css`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
-const box = (width: number, height: number) => css`
+const box = (width: number) => css`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: ${width}px;
-  height: ${height}px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
-  border-radius: 20px;
-  background-color: white;
+  background-color: #f4f4f4;
+`;
+
+const header = css`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  padding-bottom: 0;
+  margin-bottom: 8px;
   box-sizing: border-box;
 `;
-const closeBox = css`
+
+const label = css`
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #525252;
+  white-space: nowrap;
+`;
+
+const closeBox = css``;
+
+const style = {
+  title: css`
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color: #161616;
+    white-space: nowrap;
+  `,
+  description: css`
+    padding: 0 16px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  `,
+};
+
+const buttons = css`
   width: 100%;
   display: flex;
   justify-content: flex-end;
 `;
-const style = {
-  title: css`
-    font-size: 25px;
-  `,
-  description: css`
-    padding-top: 30px;
-  `,
-};
+
+const button = css`
+  width: 50%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 0;
+  margin-top: 16px;
+  border: 0;
+  color: white;
+  box-sizing: border-box;
+`;
+
+const leftButton = css`
+  background-color: #393939;
+  :hover {
+    opacity: 0.9;
+  }
+`;
+const rightButton = css`
+  background-color: #0f5aec;
+  opacity: 0.9;
+  :hover {
+    opacity: 1;
+  }
+`;
 
 type ModalProps = {
   width: number;
-  height: number;
   title: string;
   description: string;
+  firstbuttonDisabled: boolean;
+  firstButtonText: string;
+  firstButtonOnClick: () => void;
+  secondarybuttonDisabled: boolean;
+  secondaryButtonText: string;
+  secondaryButtonOnClick: () => void;
+  button: boolean;
   open: boolean;
   closeModal: () => void;
 };
 
 const ModalDemo = ({
   width,
-  height,
   title,
   description,
-  open = true,
+  firstbuttonDisabled,
+  firstButtonText,
+  firstButtonOnClick,
+  secondarybuttonDisabled,
+  secondaryButtonText,
+  secondaryButtonOnClick,
+  open,
   closeModal,
 }: ModalProps) => {
   return open ? (
     <>
       <div css={dim} onClick={closeModal} />
-      <section css={box(width, height)}>
-        <div css={closeBox} onClick={closeModal}>
-          <FontAwesomeIcon icon={faCircleXmark} />
-        </div>
-        <div css={style.title}>
-          <strong>{title}</strong>
+      <div css={box(width)}>
+        <div css={header}>
+          <div css={style.title}>
+            <div css={label}>Account resources</div>
+            {title}
+          </div>
+          <div css={closeBox} onClick={closeModal}>
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
         </div>
         <article css={style.description}>{description}</article>
-      </section>
+        <div css={buttons}>
+          {secondarybuttonDisabled ? null : (
+            <button css={[button, leftButton]} onClick={secondaryButtonOnClick}>
+              {secondaryButtonText}
+            </button>
+          )}
+          {firstbuttonDisabled ? null : (
+            <button css={[button, rightButton]} onClick={firstButtonOnClick}>
+              {firstButtonText}
+            </button>
+          )}
+        </div>
+      </div>
     </>
   ) : null;
 };

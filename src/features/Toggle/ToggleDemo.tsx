@@ -1,38 +1,109 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { darkColor, lightColor } from "../../styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const container = (height: number, toggleOn: boolean) => {
+const label = css``;
+
+const labelText = css`
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #525252;
+`;
+
+const box = css`
+  display: flex;
+  align-items: center;
+`;
+
+const toggle = (toggleSize: number, toggleOn: boolean) => {
   return css`
-    width: ${height * 2}px;
-    height: ${height}px;
+    width: ${toggleSize}px;
+    height: ${toggleSize / 2}px;
     display: flex;
     align-items: center;
-    padding: ${height / 10}px;
-    border-radius: ${height / 1.5}px;
-    background-color: ${toggleOn ? darkColor : lightColor};
+    padding: 0;
+    border: 0;
+    border-radius: ${toggleSize / 4}px;
+    background-color: ${toggleOn ? "#1a8038" : "#8d8d8d"};
     div {
-      width: ${height}px;
-      height: ${height}px;
+      width: ${toggleSize * 0.375}px;
+      height: ${toggleSize * 0.375}px;
       border-radius: 50%;
-      transform: ${toggleOn ? `translate(100%, 0)` : "translate(0 , 0)"};
-      transition: 0.3s;
       background-color: white;
+      font-size: 8px;
+      color: "black";
+      transform: ${toggleOn ? `translate(150%, 0)` : "translate(20% , 0)"};
+      transition: 0.15s;
+    }
+    :focus {
+      outline-style: double;
+      outline-width: 4px;
+      outline-color: #0e62fe;
     }
   `;
 };
 
+const toggleText = css`
+  margin-left: 10px;
+  font-size: 14px;
+`;
+
 type ToggleProps = {
-  height: number;
+  size: string;
+  hideHeaderlabel: boolean;
+  headerlabel: string;
+  hideSidelabel: boolean;
+  labelA: string;
+  labelB: string;
   toggled: boolean;
+  onClick: () => void;
   handleToggle: () => void;
 };
 
-const ToggleDemo = ({ height, toggled, handleToggle }: ToggleProps) => {
+const ToggleDemo = ({
+  size,
+  hideHeaderlabel,
+  headerlabel,
+  hideSidelabel,
+  labelA,
+  labelB,
+  toggled,
+  onClick,
+  handleToggle,
+}: ToggleProps) => {
+  let toggleSize = 48;
+
+  if (size === "small") {
+    toggleSize = 40;
+  } else if (size === "middle") {
+    toggleSize = 48;
+  } else if (size === "large") {
+    toggleSize = 56;
+  } else {
+    toggleSize = 32;
+  }
+
   return (
-    <div css={container(height, toggled)} onClick={handleToggle}>
-      <div />
-    </div>
+    <label css={label}>
+      {hideHeaderlabel ? null : <div css={labelText}>{headerlabel}</div>}
+      <div css={box}>
+        <button
+          css={toggle(toggleSize, toggled)}
+          onClick={() => {
+            onClick();
+            handleToggle();
+          }}
+        >
+          <div>
+            {size === "mini" ? <FontAwesomeIcon icon={faCheck} /> : null}
+          </div>
+        </button>
+        {hideSidelabel ? null : (
+          <span css={toggleText}>{toggled ? labelA : labelB}</span>
+        )}
+      </div>
+    </label>
   );
 };
 
