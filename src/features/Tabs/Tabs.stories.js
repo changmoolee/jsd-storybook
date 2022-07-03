@@ -1,17 +1,24 @@
 import React from "react";
 import { useArgs } from "@storybook/client-api";
-import TabsDemo from "./TabsDemo";
-import { TabList, Tab, TabsDescriptions, TabsDescription } from "./TabsDemo";
+import { Tabs, TabList, Tab, TabsDescriptions, TabsDescription } from "./Tabs";
 
 export default {
   title: "Feature/Tabs",
-  component: TabsDemo,
+  component: Tabs,
   argTypes: {
     clicked: {
       name: "clicked",
       type: { name: "number", required: true },
-      description: "clicked Tab",
       defaultValue: 0,
+      control: {
+        type: null,
+      },
+    },
+    children: {
+      name: "children",
+      control: {
+        type: null,
+      },
     },
   },
   parameters: {
@@ -31,13 +38,21 @@ const Template = (args) => {
     handleClick,
   };
 
-  return <TabsDemo {...stateArgs} {...args} />;
+  return <Tabs {...stateArgs} {...args} />;
 };
 
 export const Primary = Template.bind({});
 
+const style = {
+  width: "100%",
+  height: "50px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
 const example = (
-  <TabsDemo>
+  <Tabs>
     <TabList>
       <Tab>child1</Tab>
       <Tab>child2</Tab>
@@ -45,11 +60,20 @@ const example = (
       <Tab>child4</Tab>
     </TabList>
     <TabsDescriptions>
-      <TabsDescription>child1</TabsDescription>
-      <TabsDescription>child2</TabsDescription>
-      <TabsDescription>child3</TabsDescription>
+      <TabsDescription>
+        <div style={style}>child1</div>
+      </TabsDescription>
+      <TabsDescription>
+        <div style={style}>child2</div>
+      </TabsDescription>
+      <TabsDescription>
+        <div style={style}>child3</div>
+      </TabsDescription>
+      <TabsDescription>
+        <div style={style}>child4</div>
+      </TabsDescription>
     </TabsDescriptions>
-  </TabsDemo>
+  </Tabs>
 );
 
 Primary.args = {
