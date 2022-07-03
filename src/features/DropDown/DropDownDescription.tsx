@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { layout, feature, description } from "../../styled";
-import DropDownDemo from "./DropDownDemo";
+import DropDown from "./DropDown";
 
 const container = css`
   width: 200px;
