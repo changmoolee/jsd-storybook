@@ -6,59 +6,91 @@ export default {
   title: "Feature/Dropdown",
   component: DropDown,
   argTypes: {
-    label: {
-      title: "titleText",
-      type: { name: "string", required: false },
-      description: "specifing the title.",
-      defaultValue: "Dropdown label",
-    },
-    hideLabel: {
-      title: "titleText",
-      type: { name: "boolean", required: false },
-      description: "controlling the displaying label.",
-      defaultValue: false,
-    },
-    warn: {
-      title: "warnText",
-      type: { name: "string", required: false },
-      description: "specifying the warning.",
-      defaultValue: "This is some helper text",
-    },
-    hideWarn: {
-      title: "warnText",
-      type: { name: "boolean", required: false },
-      description: "controlling the displaying warn.",
-      defaultValue: false,
-    },
-    size: {
-      title: "size",
-      type: { name: "select", required: true },
-      description: "controlling the displaying warn.",
-      defaultValue: "middle",
-      options: ["small", "middle", "large"],
-    },
-    zIndex: {
-      title: "z-index",
-      type: { name: "number", required: false },
-      description: "handling the the value of z-index.",
-      defaultValue: 300,
-    },
-    open: {
-      title: "open",
-      type: { name: "boolean", required: true },
-      description: "handling the suggestion.",
-      defaultValue: false,
+    items: {
+      name: "items",
+      description:
+        "We try to stay as generic as possible here to allow individuals to pass in a collection of whatever kind of data structure they prefer.",
+      type: { name: "array", required: false },
+      table: {
+        type: {
+          summary: "array",
+        },
+      },
       control: {
         type: null,
       },
     },
+    label: {
+      name: "label",
+      type: { name: "string", required: false },
+      description: "Specify the label of the DropDown.",
+      defaultValue: "Dropdown label",
+    },
+    hideLabel: {
+      name: "hideLabel",
+      type: { name: "boolean", required: false },
+      description: "Controlling the displaying label.",
+      defaultValue: false,
+    },
+    warn: {
+      name: "warn",
+      type: { name: "string", required: false },
+      description: "Specify the warning of the DropDown.",
+      defaultValue: "This is some helper text",
+    },
+    hideWarn: {
+      name: "hideWarn",
+      type: { name: "boolean", required: false },
+      description: "Controlling the displaying warning.",
+      defaultValue: false,
+    },
+    size: {
+      name: "size",
+      type: { name: "select", required: false },
+      description: "Specify the size of the DropDown.",
+      table: {
+        type: { summary: `small middle large` },
+      },
+      defaultValue: "middle",
+      options: ["small", "middle", "large"],
+    },
+    zIndex: {
+      name: "zIndex",
+      type: { name: "number", required: false },
+      description: "Handling the z-index property of the DropDown.",
+      defaultValue: 300,
+    },
+    open: {
+      name: "open",
+      type: { name: "boolean", required: false },
+      description: "Handling the DropDown suggestion.",
+      defaultValue: false,
+      table: {
+        disable: true,
+      },
+    },
     seletedItem: {
-      title: "selectedItem",
-      type: { name: "number", required: true },
-      description: "clicked Item Index",
+      name: "selectedItem",
+      type: { name: "number", required: false },
+      description: "Clicked Index of the Item in the suggestion.",
       defaultValue: 0,
-      control: {
-        type: null,
+      table: {
+        disable: true,
+      },
+    },
+    handleSuggestion: {
+      table: {
+        disable: true,
+      },
+    },
+    closeSuggestion: {
+      table: {
+        disable: true,
+      },
+    },
+    clickItem: {
+      table: {
+        disable: true,
       },
     },
   },

@@ -6,44 +6,93 @@ export default {
   component: Button,
   argTypes: {
     name: {
-      name: "button",
-      type: { name: "string", required: true },
-      description: "naming the button",
-      defaultValue: "Button",
-    },
-    border: {
-      name: "border",
+      name: "name",
       type: { name: "string", required: false },
-      description: "handling the border of the button",
-      defaultValue: "none",
-    },
-    color: {
-      name: "color",
-      type: { name: "string", required: true },
-      description: "handling the color of the button",
-      defaultValue: "white",
+      description: "Specify the name of the Button.",
+      defaultValue: "Button",
     },
     size: {
       name: "size",
-      type: { name: "select", required: true },
-      description: "handling the size of the button",
-      defaultValue: "large",
+      type: { name: "select", required: false },
+      description: "Specify the size of the Button.",
+      table: {
+        type: {
+          summary: `small middle large xlarge 2xlarge`,
+        },
+      },
+      defaultValue: "middle",
       options: ["small", "middle", "large", "xlarge", "2xlarge"],
+    },
+    border: {
+      name: "border",
+      type: { required: false },
+      defaultValue: "none",
+      control: { type: null },
+      table: {
+        disable: true,
+      },
+    },
+    bgColor: {
+      table: {
+        disable: true,
+      },
+    },
+    color: {
+      type: { required: false },
+      defaultValue: "white",
+      control: { type: null },
+      table: {
+        disable: true,
+      },
     },
     tabIndex: {
       name: "tabIndex",
-      type: { name: "number", required: true },
-      description: "handling the tabindex property of the button",
+      type: { name: "number", required: false },
+      description: "Handling the tabindex property of the Button",
       defaultValue: 0,
+    },
+    hover: {
+      table: {
+        disable: true,
+      },
+    },
+    active: {
+      table: {
+        disable: true,
+      },
     },
     onClick: {
       name: "onClick",
+      type: { required: false },
+      description:
+        "Provide an optional function to be called when the button element is clicked",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
     onMouseEnter: {
       name: "onMouseEnter",
+      type: { required: false },
+      description:
+        "Provide an optional function to be called when the mouse enters the button element",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
     onMouseLeave: {
       name: "onMouseLeave",
+      type: { required: false },
+      description:
+        "Provide an optional function to be called when the mouse leaves the button element",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
   },
   parameters: {
@@ -69,6 +118,7 @@ export const Danger = Template.bind({});
 
 Danger.args = {
   bgColor: "#da1e28",
+  border: "none",
   hover: {
     bgColor: "#b91823",
   },
@@ -108,10 +158,12 @@ export const Tertiary = Template.bind({});
 Tertiary.args = {
   bgColor: "transparent",
   hover: {
+    border: "white",
     bgColor: "#024fe5",
     color: "white",
   },
   active: {
+    border: "white",
     bgColor: "#022b9d",
     color: "white",
   },

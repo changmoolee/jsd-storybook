@@ -1,56 +1,81 @@
 import React from "react";
 import { useArgs } from "@storybook/client-api";
-import ToggleDemo from "./ToggleDemo";
+import Toggle from "./Toggle";
 
 export default {
   title: "Feature/Toggle",
-  component: ToggleDemo,
+  component: Toggle,
   argTypes: {
     size: {
-      title: "size",
-      type: { name: "select", required: true },
+      name: "size",
+      type: { name: "select", required: false },
+      description: "Specify the size of the Toggle.",
       defaultValue: "middle",
       options: ["small", "middle", "large"],
       table: {
         defaultValue: { summary: "middle" },
         type: {
-          summary: "Shows options to the Badge",
-          // detail: "Listing of available options",
+          summary: `small middle large`,
         },
       },
     },
     toggled: {
-      title: "toggled",
-      type: { name: "boolean", required: true },
+      name: "toggled",
+      type: { name: "boolean", required: false },
+      description: "Specify whether the control is toggled",
       defaultValue: true,
+      control: {
+        disable: true,
+      },
     },
     hideHeaderlabel: {
-      title: "hideHeaderlabel",
-      type: { name: "boolean", required: true },
+      name: "hideHeaderlabel",
+      type: { name: "boolean", required: false },
+      description: "Specify whether the header label should be hidden, or not",
       defaultValue: false,
     },
     headerlabel: {
-      title: "headerlabel",
+      name: "headerlabel",
       type: { name: "string", required: false },
+      description:
+        "Provide the text that will be read by a screen reader when visiting this control.",
       defaultValue: "Toggle element label",
     },
     hideSidelabel: {
-      title: "hideSidelabel",
-      type: { name: "boolean", required: true },
+      name: "hideSidelabel",
+      type: { name: "boolean", required: false },
+      description: "Specify whether the label should be hidden, or not",
       defaultValue: false,
     },
     labelA: {
-      title: "labelA",
+      name: "labelA",
       type: { name: "string", required: false },
+      description: "Specify the label for the `off` position",
       defaultValue: "On",
     },
     labelB: {
-      title: "labelB",
+      name: "labelB",
       type: { name: "string", required: false },
+      description: "Specify the label for the `on` position",
       defaultValue: "Off",
     },
     onClick: {
-      title: "onClick",
+      name: "onClick",
+      type: { required: false },
+      description:
+        "Provide an event listener that is called when the control is clicked.",
+      table: {
+        type: { summary: "func" },
+      },
+    },
+    handleToggle: {
+      name: "onToggle",
+      type: { required: false },
+      description:
+        "Provide an event listener that is called when the control is toggled.",
+      table: {
+        type: { summary: "func" },
+      },
     },
   },
   parameters: {
@@ -74,7 +99,7 @@ const Template = (args) => {
     handleToggle,
   };
 
-  return <ToggleDemo {...stateArgs} {...args} />;
+  return <Toggle {...stateArgs} {...args} />;
 };
 
 export const Primary = Template.bind({});

@@ -2,9 +2,9 @@
 import { css } from "@emotion/react";
 import { mainColor } from "../../styled";
 
-const box = (width: number, height: number) => css`
-  width: ${width}px;
-  height: ${height}px;
+const box = (width: string, height: string) => css`
+  width: ${width};
+  height: ${height};
   display: flex;
 `;
 const item = (clicked: number, index: number) => {
@@ -34,8 +34,8 @@ const text = css`
 `;
 
 type TabsProps = {
-  width: number;
-  height: number;
+  width: string;
+  height: string;
   clicked: number;
   handleClick: (index: number) => void;
   children: JSX.Element;

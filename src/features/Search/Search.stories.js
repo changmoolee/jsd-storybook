@@ -9,27 +9,46 @@ export default {
     defaultValue: {
       name: "defaultValue",
       type: { name: "string", required: false },
-      description: "setting the default value in input box.",
+      description: "Setting the default value in input box.",
       defaultValue: "",
     },
     value: {
       name: "value",
       type: { name: "string", required: false },
-      description: "setting the value in input box.",
+      description: "Setting the value in input box.",
       defaultValue: "",
+      table: {
+        disable: true,
+      },
     },
     autoComplete: {
       name: "autoComplete",
-      type: { name: "select", required: true },
-      description: "setting the autoComplete property.",
+      type: { name: "select", required: false },
+      description:
+        "Specify an optional value for the autocomplete property on the underlying '<input>', defaults to 'off'.",
       defaultValue: "off",
       options: ["on", "off"],
+      table: {
+        type: {
+          summary: `on off`,
+        },
+      },
     },
     disabled: {
       name: "disabled",
-      type: { name: "boolean", required: true },
-      description: "handling the disabled state.",
+      type: { name: "boolean", required: false },
+      description: "handling the disabled state of the Search.",
       defaultValue: false,
+    },
+    clearInput: {
+      table: {
+        disable: true,
+      },
+    },
+    updateValue: {
+      table: {
+        disable: true,
+      },
     },
   },
 };

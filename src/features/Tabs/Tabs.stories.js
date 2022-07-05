@@ -1,23 +1,47 @@
 import React from "react";
 import { useArgs } from "@storybook/client-api";
-import { Tabs, TabList, Tab, TabsDescriptions, TabsDescription } from "./Tabs";
+import Tabs from "./Tabs";
+import { TabList, Tab, TabsDescriptions, TabsDescription } from "./Tabs";
 
 export default {
   title: "Feature/Tabs",
   component: Tabs,
   argTypes: {
+    width: {
+      description:
+        "Handling the width of the Tabs. ('px' and '%' units are ok.)",
+      type: { required: false },
+    },
+    height: {
+      description:
+        "Handling the height of the Tabs. ('px' and '%' units are ok.)",
+      type: { required: false },
+    },
     clicked: {
       name: "clicked",
-      type: { name: "number", required: true },
+      type: { name: "number", required: false },
       defaultValue: 0,
+      table: {
+        disable: true,
+      },
       control: {
         type: null,
       },
     },
     children: {
       name: "children",
+      description:
+        "Provide child elements to be rendered inside of the Tabs. These elements should render either 'TabsList' or 'TabsDescription'.",
+      table: {
+        type: { summary: "node" },
+      },
       control: {
         type: null,
+      },
+    },
+    handleClick: {
+      table: {
+        disable: true,
       },
     },
   },
@@ -77,7 +101,7 @@ const example = (
 );
 
 Primary.args = {
-  width: 600,
-  height: 50,
+  width: "600px",
+  height: "50px",
   children: example,
 };
