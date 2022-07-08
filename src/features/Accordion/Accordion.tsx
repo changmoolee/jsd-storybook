@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import { useState } from "react";
 
 const container = css`
   width: 100%;
@@ -47,16 +47,15 @@ const content = (open: boolean) => css`
 type AccordionProps = {
   title: string;
   children: JSX.Element;
-  open: boolean;
-  handleAccordion: () => void;
 };
 
-const Accordion = ({
-  title,
-  children,
-  open,
-  handleAccordion,
-}: AccordionProps) => {
+const Accordion = ({ title, children }: AccordionProps) => {
+  const [open, setOpen] = useState(false);
+
+  const handleAccordion = () => {
+    setOpen((open) => !open);
+  };
+
   return (
     <div css={container}>
       <button tabIndex={-1} css={button(open)} onClick={handleAccordion}>

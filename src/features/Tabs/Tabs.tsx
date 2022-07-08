@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useState } from "react";
 import { mainColor } from "../../styled";
 
 const box = (width: string, height: string) => css`
@@ -36,14 +37,18 @@ const text = css`
 type TabsProps = {
   width: string;
   height: string;
-  clicked: number;
-  handleClick: (index: number) => void;
   children: JSX.Element;
 };
 
-const Tabs = ({ width, height, clicked, handleClick, children }: TabsProps) => {
+const Tabs = ({ width, height, children }: TabsProps) => {
   const TabList = children?.props.children[0].props.children;
   const TabsDescription = children?.props.children[1].props.children;
+
+  const [clicked, setClicked] = useState(0);
+
+  const handleClick = (index: number) => {
+    setClicked(index);
+  };
 
   return (
     <div>

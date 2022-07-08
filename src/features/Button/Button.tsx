@@ -24,35 +24,35 @@ const container = (
   display: flex;
   align-items: center;
   padding: 3px 60px 3px 12px;
-  border: ${border};
-  background-color: ${bgColor};
+  border: ${border || "none"};
+  background-color: ${bgColor || "transparent"};
   font-size: 14px;
   color: ${color};
   :hover {
-    border: ${hover.border};
-    background-color: ${hover.bgColor};
-    color: ${hover.color};
+    border: ${hover && hover.border};
+    background-color: ${hover && hover.bgColor};
+    color: ${hover && hover.color};
   }
   :focus {
     border-width: 4px;
     border-style: double;
   }
   :active {
-    border: ${active.border};
-    background-color: ${active.bgColor};
-    color: ${active.color};
+    border: ${active && active.border};
+    background-color: ${active && active.bgColor};
+    color: ${active && active.color};
   }
 `;
 
 type ButtonProps = {
   name: string;
   bgColor: string;
-  hover: { border: string; bgColor: string; color: string };
-  active: { border: string; bgColor: string; color: string };
   border: string;
   color: string;
   size: string;
   tabIndex: number;
+  hover: { border: string; bgColor: string; color: string };
+  active: { border: string; bgColor: string; color: string };
   onClick: () => void;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
@@ -61,12 +61,12 @@ type ButtonProps = {
 const Button = ({
   name,
   bgColor,
-  hover,
-  active,
   border,
   color,
   size,
   tabIndex,
+  hover,
+  active,
   onClick,
   onMouseEnter,
   onMouseLeave,

@@ -11,6 +11,16 @@ export const parameters = {
     },
     expanded: true,
   },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: "color-contrast",
+          enabled: false,
+        },
+      ],
+    },
+  },
 };
 
 const layout = {

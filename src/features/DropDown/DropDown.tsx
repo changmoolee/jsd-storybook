@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -105,11 +105,6 @@ type DropDownProps = {
   hideWarn: boolean;
   size: string;
   zIndex: number;
-  open: boolean;
-  seletedItem: number;
-  handleSuggestion: () => void;
-  closeSuggestion: () => void;
-  clickItem: (index: number) => void;
 };
 
 const DropDown = ({
@@ -120,12 +115,22 @@ const DropDown = ({
   hideWarn,
   size,
   zIndex,
-  open,
-  seletedItem,
-  handleSuggestion,
-  closeSuggestion,
-  clickItem,
 }: DropDownProps) => {
+  const [open, setOpen] = useState(false);
+  const [seletedItem, setSeletedItem] = useState(0);
+
+  const handleSuggestion = () => {
+    setOpen((open) => !open);
+  };
+
+  const closeSuggestion = () => {
+    setOpen((open) => !open);
+  };
+
+  const clickItem = (index: number) => {
+    setSeletedItem(index);
+  };
+
   const buttonRef = useRef<any>(null);
 
   useLayoutEffect(() => {

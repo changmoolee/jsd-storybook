@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
@@ -56,9 +57,7 @@ type ToggleProps = {
   hideSidelabel: boolean;
   labelA: string;
   labelB: string;
-  toggled: boolean;
   onClick: () => void;
-  handleToggle: () => void;
 };
 
 const Toggle = ({
@@ -68,10 +67,14 @@ const Toggle = ({
   hideSidelabel,
   labelA,
   labelB,
-  toggled,
   onClick,
-  handleToggle,
 }: ToggleProps) => {
+  const [toggled, setToggled] = useState(false);
+
+  const handleToggle = () => {
+    setToggled((toggled) => !toggled);
+  };
+
   let toggleSize = 48;
 
   if (size === "small") {

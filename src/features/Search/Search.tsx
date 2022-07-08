@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
 
 const container = (disabled: boolean) => css`
   width: 400px;
@@ -56,19 +56,19 @@ type SearchProps = {
   defaultValue: string;
   disabled: boolean;
   autoComplete: string;
-  value: any;
-  clearInput: () => void;
-  updateValue: (event: any) => void;
 };
 
-const Search = ({
-  defaultValue,
-  disabled,
-  value,
-  autoComplete,
-  clearInput,
-  updateValue,
-}: SearchProps) => {
+const Search = ({ defaultValue, disabled, autoComplete }: SearchProps) => {
+  const [value, setValue] = useState("");
+
+  const clearInput = () => {
+    setValue("");
+  };
+
+  const updateValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
   return (
     <label htmlFor="search" css={container(disabled)}>
       <span css={searchIcon}>

@@ -1,15 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+export * from "./features/Accordion/Accordion";
+export * from "./features/Button/Button";
+export * from "./features/DropDown/DropDown";
+export * from "./features/Loading/Loading";
+export * from "./features/Modal/Modal";
+export * from "./features/Search/Search";
+export * from "./features/SkeletonUI/SkeletonUI";
+export * from "./features/Tabs/Tabs";
+export * from "./features/Toggle/Toggle";
